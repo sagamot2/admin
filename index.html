@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>หลังบ้านร้านส้มตำ</title>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="loginPage" class="login-wrapper">
+    <div class="login-container">
+      <div class="login-icon">🌶️</div>
+      <h2>เข้าสู่ระบบแอดมิน</h2>
+      <div class="input-group">
+        <label for="username">ชื่อผู้ใช้</label>
+        <input type="text" id="username" placeholder="กรอกชื่อผู้ใช้" />
+      </div>
+      <div class="input-group">
+        <label for="password">รหัสผ่าน</label>
+        <input type="password" id="password" placeholder="กรอกรหัสผ่าน" />
+      </div>
+      <button id="loginBtn">เข้าสู่ระบบ</button>
+      <p id="loginError" class="error-msg hidden"></p>
+    </div>
+  </div>
+
+  <div id="adminPage" class="hidden admin-layout">
+    <header class="admin-header">
+      <div class="header-title">
+        <h1>🌶️ แดชบอร์ดร้านส้มตำ</h1>
+        <p class="subtitle">ระบบจัดการหลังบ้าน</p>
+      </div>
+      <div class="header-actions">
+        <button id="muteBtn" class="mute-btn">🔊 เปิดเสียง</button>
+        <button id="logoutBtn" class="logout-btn">ออกจากระบบ</button>
+      </div>
+    </header>
+
+    <div class="controls-bar">
+      <div class="filter-group">
+        <label for="filterDate">📅 กรองวันที่:</label>
+        <input type="date" id="filterDate" />
+      </div>
+      <button id="resetQueueBtn" class="reset-btn">🔄 รีเซตคิววันนี้</button>
+    </div>
+
+    <div class="dashboard-cards">
+      <div class="card summary-card">
+        <div class="card-icon blue">📝</div>
+        <div class="card-info">
+          <h3>ออเดอร์</h3>
+          <p class="highlight-text"><span id="orderCount">0</span></p>
+        </div>
+      </div>
+      <div class="card summary-card">
+        <div class="card-icon green">💰</div>
+        <div class="card-info">
+          <h3>รายได้รวม (฿)</h3>
+          <p class="highlight-text text-green"><span id="totalRevenue">0.00</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-grid">
+      <div class="orders-section">
+        <div class="section-header">
+          <h2>📋 คำสั่งซื้อ</h2>
+          <div class="status-filters" id="statusFilters">
+            <button class="filter-btn active" data-filter="all">ทั้งหมด</button>
+            <button class="filter-btn" data-filter="รอทำ">⏳ รอทำ</button>
+            <button class="filter-btn" data-filter="ทำเสร็จแล้ว">✅ เสร็จแล้ว</button>
+          </div>
+        </div>
+        <div id="orderList" class="order-list-container">กำลังโหลดคำสั่งซื้อ...</div>
+      </div>
+      
+      <div class="chart-section">
+        <div class="top-sellers-section" style="margin-bottom: 20px;">
+          <h2>🔥 5 อันดับเมนูขายดี</h2>
+          <div class="card">
+            <canvas id="topSellersChart" width="400" height="300"></canvas>
+          </div>
+        </div>
+        <h2>📈 สถิติยอดขาย</h2>
+        <div class="card chart-container">
+          <canvas id="salesChart" width="800" height="350"></canvas>
+        </div>
+      </div>
+      
+      <div class="menu-manager-section" style="grid-column: 1 / -1; margin-top: 20px;">
+        <h2>🛒 จัดการสถานะวัตถุดิบ (ติ๊กเพื่อตั้งของหมด)</h2>
+        <div class="card">
+          <div id="adminMenuList" class="menu-manager-grid"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="slipModal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <img id="modalSlipImg" src="" alt="สลิปโอนเงิน">
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
